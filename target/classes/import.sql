@@ -1,0 +1,10 @@
+INSERT INTO tb_client(name, cpf, income, birth_date, children) VALUES('Monkey D. Luffy', '123.456.789.01', 3000.000, '1520-05-05', 0);
+INSERT INTO tb_client(name, cpf, income, birth_date, children) VALUES('Roronoa Zoro', '045.123.789.86', 1111.100, '1518-11-11', 5);
+INSERT INTO tb_client(name, cpf, income, birth_date, children) VALUES('Nami Mère', '022.628.707.59', 366.000, '1519-07-03', 0);
+INSERT INTO tb_client(name, cpf, income, birth_date, children) VALUES('Usopo "God"', '741.147.852.25', 500.000, '1520-04-01', 10);
+INSERT INTO tb_client(name, cpf, income, birth_date, children) VALUES('Sanji Vinsmoke', '963.852.741.85', 1032.000, '1518-03-02', 2);
+INSERT INTO tb_client(name, cpf, income, birth_date, children) VALUES('Tony Tony Chopper', '784.512.066.69', 1000, '1522-09-03', 0);
+INSERT INTO tb_client(name, cpf, income, birth_date, children) VALUES('Nico Robin', '011.101.909.12', 930.000, '1509-02-06', 0);
+INSERT INTO tb_client(name, cpf, income, birth_date, children) VALUES('Cutty Flam "Franky"', '054.806.909.74', 394.000, '1503-03-09', 0);
+INSERT INTO tb_client(name, cpf, income, birth_date, children) VALUES('Brook "Soul King"', '123.753.159.89', 383.000, '1449-04-03', 1);
+INSERT INTO tb_client(name, cpf, income, birth_date, children) VALUES('Jinbe "Cavaleiro do Mar"', '456.357.951.23', 1110.000, '1493-04-02', 20);
