@@ -2,6 +2,7 @@ package com.desafios.desafioCRUD.services;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.desafios.desafioCRUD.dto.ClientDTO;
 import com.desafios.desafioCRUD.entities.Client;
 import com.desafios.desafioCRUD.repositories.ClientRepository;
+import com.desafios.desafioCRUD.services.exceptions.DatabaseException;
+import com.desafios.desafioCRUD.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class ClientService {
@@ -45,6 +48,19 @@ public class ClientService {
 		return new ClientDTO(entity);
 	}
 
+	@Transactional
+	public void delete(Long id) {
+		if (!repository.existsById(id)) {
+			throw new ResourceNotFoundException("Client not found");
+		}
+		 try {
+			 repository.deleteById(id);
+		 }
+		catch (DataIntegrityViolationException e) {
+			throw new DatabaseException("referential integrity failure");
+		}
+	}
+	
 	private void copyDtoToEntity(ClientDTO dto, Client entity) {
 		entity.setName(dto.getName());
 		entity.setCpf(dto.getCpf());
@@ -52,4 +68,5 @@ public class ClientService {
 		entity.setBirthDate(dto.getBirthDate());
 		entity.setChildren(dto.getChildren());
 	}
+	
 }
