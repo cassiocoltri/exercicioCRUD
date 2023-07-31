@@ -14,6 +14,8 @@ import com.desafios.desafioCRUD.repositories.ClientRepository;
 import com.desafios.desafioCRUD.services.exceptions.DatabaseException;
 import com.desafios.desafioCRUD.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class ClientService {
 
@@ -22,7 +24,7 @@ public class ClientService {
 	
 	@Transactional(readOnly = true)
 	public ClientDTO findById(Long id) {
-		Client cli = repository.findById(id).get();
+		Client cli = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not founded"));
 		return new ClientDTO(cli);
 	}
 	
@@ -42,10 +44,16 @@ public class ClientService {
 	
 	@Transactional
 	public ClientDTO update(Long id, ClientDTO dto) {
-		Client entity = repository.getReferenceById(id);
-		copyDtoToEntity(dto, entity);
-		entity = repository.save(entity);
-		return new ClientDTO(entity);
+		try {
+			Client entity = repository.getReferenceById(id);
+			copyDtoToEntity(dto, entity);
+			entity = repository.save(entity);
+			return new ClientDTO(entity);
+		} 
+		catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Client not found");
+		}
+		
 	}
 
 	@Transactional
